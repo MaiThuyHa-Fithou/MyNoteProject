@@ -1,6 +1,8 @@
 package com.mtha.mynoteproject;
 
-public class Note {
+import java.io.Serializable;
+
+public class Note implements Serializable {
     String tieuDe;
     String noiDung;
     String ngayTao;

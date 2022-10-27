@@ -8,7 +8,7 @@
     <TextView
         android:id="@+id/tvTieuDe"
         android:layout_width="361dp"
-        android:layout_height="53dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="27dp"
         android:layout_marginTop="36dp"
         android:layout_marginEnd="23dp"
@@ -25,13 +25,14 @@
     <TextView
         android:id="@+id/tvNgayTao"
         android:layout_width="257dp"
-        android:layout_height="46dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="131dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="23dp"
         android:gravity="right"
         android:text="TextView"
         android:textColor="#060F42"
+        android:textSize="18sp"
         android:textStyle="italic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -41,15 +42,15 @@
     <LinearLayout
         android:layout_width="96dp"
         android:layout_height="40dp"
-        android:layout_marginStart="332dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="136dp"
+        android:layout_marginStart="280dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:baselineAligned="true"
         android:gravity="right"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvNgayTao"
         app:layout_optimizationLevel="groups">
 
         <ImageButton

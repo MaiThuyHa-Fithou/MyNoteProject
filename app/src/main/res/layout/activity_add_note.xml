@@ -14,8 +14,8 @@
         android:layout_marginTop="49dp"
         android:layout_marginEnd="11dp"
         android:ems="10"
+        android:hint="Nhap tieu de"
         android:inputType="textPersonName"
-        android:text="Name"
         android:textColor="#9C27B0"
         android:textSize="20sp"
         android:textStyle="bold|italic"
@@ -26,13 +26,15 @@
     <EditText
         android:id="@+id/etNoiDung"
         android:layout_width="389dp"
-        android:layout_height="292dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="18dp"
         android:layout_marginEnd="11dp"
         android:ems="10"
         android:gravity="start|top"
+        android:hint="nhap noi dung"
         android:inputType="textMultiLine"
+        android:minHeight="48dp"
         android:textAlignment="textStart"
         android:textColor="#0A196E"
         android:textSize="16sp"
@@ -48,13 +50,14 @@
         android:layout_height="59dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="233dp"
+        android:layout_marginEnd="9dp"
         android:ems="10"
         android:enabled="false"
+        android:hint="dd/mm/yyyy"
         android:inputType="date"
         android:textColor="#0A196E"
         android:textStyle="normal"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/inputDate"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etNoiDung"
         tools:ignore="SpeakableTextPresentCheck" />
@@ -66,10 +69,24 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
+        android:onClick="onSelectDate"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/etNgayTao"
         app:layout_constraintTop_toBottomOf="@+id/etNoiDung"
         app:srcCompat="@android:drawable/ic_menu_today"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageButton
+        android:id="@+id/Cancel"
+        android:layout_width="97dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="29dp"
+        android:layout_marginEnd="94dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/Save"
+        app:layout_constraintTop_toBottomOf="@+id/etNgayTao"
+        app:srcCompat="@android:drawable/ic_menu_close_clear_cancel"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <ImageButton
@@ -78,24 +95,12 @@
         android:layout_height="72dp"
         android:layout_marginStart="102dp"
         android:layout_marginTop="29dp"
-        android:layout_marginBottom="132dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginEnd="21dp"
+        android:onClick="onSaveNote"
+        app:layout_constraintEnd_toStartOf="@+id/Cancel"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etNgayTao"
         app:srcCompat="@android:drawable/ic_menu_save"
-        tools:ignore="SpeakableTextPresentCheck" />
-
-    <ImageButton
-        android:id="@+id/Cancel"
-        android:layout_width="97dp"
-        android:layout_height="70dp"
-        android:layout_marginStart="21dp"
-        android:layout_marginEnd="94dp"
-        android:layout_marginBottom="134dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/Save"
-        app:srcCompat="@android:drawable/ic_menu_close_clear_cancel"
         tools:ignore="SpeakableTextPresentCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
