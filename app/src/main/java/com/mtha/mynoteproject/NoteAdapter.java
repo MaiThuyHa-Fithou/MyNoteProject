@@ -25,6 +25,7 @@ import java.util.ArrayList;
 
 public class NoteAdapter extends ArrayAdapter<Note> {
     ArrayList<Note> listNote;
+    NoteProvider noteProvider = new NoteProvider(getContext());
     public NoteAdapter(@NonNull Context context,  @NonNull ArrayList<Note> objects) {
         super(context, 0, objects);
         this.listNote = objects;
@@ -97,7 +98,7 @@ public class NoteAdapter extends ArrayAdapter<Note> {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 //xu ly xoa
-                              if  (delNote(note)){
+                              if  (delNote(note.id+"")){
                                   Toast.makeText(getContext(), "Xoa thanh cong", Toast.LENGTH_SHORT).show();
                               }else{
                                   Toast.makeText(getContext(), "khong xoa duoc", Toast.LENGTH_SHORT).show();
@@ -117,9 +118,16 @@ public class NoteAdapter extends ArrayAdapter<Note> {
         });
         return curView;
     }
-    private boolean delNote(Note note){
-        boolean isDel = listNote.remove(note);
-        notifyDataSetChanged();
-        return isDel;
+    private boolean delNote(String id){
+        int isDel = noteProvider.delNote(id);
+        if(isDel<=0)
+            return false;
+        else{
+            //cap nhat lai listnote
+            listNote.clear();
+            listNote.addAll(noteProvider.getAllNote());
+            notifyDataSetChanged();
+            return true;
+        }
     }
 }

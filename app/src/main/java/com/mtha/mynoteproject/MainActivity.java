@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Note> data = new ArrayList<>();
     NoteAdapter adapter;
     FloatingActionButton addNote;
-    final static int INS=1001;//requestcode de them moi
+    NoteProvider noteProvider = new NoteProvider(MainActivity.this);//dung de thao tac voi datbase - tblNote
     //khai bao mot doi tuong xu ly kq tra ve ActivityResultLaucher
 
 
@@ -29,7 +29,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //initData();
+        //lay du lieu tu database
+        data = noteProvider.getAllNote();
         //khoi tao adapter
         adapter = new NoteAdapter(MainActivity.this,data);
         //tim listview va set adapter cho listview
@@ -77,8 +78,23 @@ public class MainActivity extends AppCompatActivity {
                if(action.equals("insert")){
                    //them du lieu vao trong list data source
                    Note note =(Note) result.getData().getExtras().get("note");
-                   data.add(note);
-                   adapter.notifyDataSetChanged();
+                  //insert du lieu vao database
+                   if(noteProvider.insNote(note)){
+                       Toast.makeText(MainActivity.this, "Insert success!",
+                               Toast.LENGTH_SHORT).show();
+                       //refesh lai du lieu
+                       data.clear();
+                       data.addAll(noteProvider.getAllNote());
+                       adapter.notifyDataSetChanged();
+                       lvNotes.invalidateViews();
+                       lvNotes.refreshDrawableState();
+                   }else {
+                       Toast.makeText(MainActivity.this, "Insert fail!",
+                               Toast.LENGTH_SHORT).show();
+                   }
+
+               }else if(action.equals("update")){
+                   //thuc hien cap nhat lai database
                }
             }
 
