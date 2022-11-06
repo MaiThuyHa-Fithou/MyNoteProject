@@ -36,27 +36,12 @@ public class NoteAdapter extends ArrayAdapter<Note> {
                 public void onActivityResult(ActivityResult result) {
                   if(result.getResultCode()==  ((AppCompatActivity)getContext()).RESULT_OK){
 
-                      updNote(result.getData());
+                      updNote((Note)result.getData().getSerializableExtra("note"));
 
                   }
                 }
             }
     );
-    private void updNote(Intent intent) {
-        Note note = (Note) intent.getExtras().get("note");
-        int index = -1;
-        for (Note n : listNote) {
-            if (n.tieuDe.equals(note.tieuDe)) {
-                index = listNote.indexOf(n);
-                break;
-            }
-        }
-        //cap nhat lai du lieu moi
-        if (index != -1) {
-            listNote.set(index, note);
-            notifyDataSetChanged();
-        }
-    }
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView,
@@ -79,11 +64,11 @@ public class NoteAdapter extends ArrayAdapter<Note> {
         imgEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                Intent updIntent = new Intent(getContext(),AddNoteActivity.class);
                updIntent.putExtra("action","update");
                updIntent.putExtra("note", note);
                activityResultLauncher.launch(updIntent);
-
             }
         });
 
@@ -124,9 +109,23 @@ public class NoteAdapter extends ArrayAdapter<Note> {
             return false;
         else{
             //cap nhat lai listnote
-            listNote.clear();
-            listNote.addAll(noteProvider.getAllNote());
-            notifyDataSetChanged();
+            loadListNote();
+            return true;
+        }
+    }
+
+    private void loadListNote(){
+        listNote.clear();
+        listNote.addAll(noteProvider.getAllNote());
+        notifyDataSetChanged();
+    }
+    private boolean updNote(Note note){
+        int kq = noteProvider.updNote(note, note.tieuDe);
+        if(kq<=0){
+            return  false;
+        }else {
+            //update lai list note
+            loadListNote();
             return true;
         }
     }

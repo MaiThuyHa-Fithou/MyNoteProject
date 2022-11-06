@@ -51,21 +51,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-    private void updNote(Intent intent){
-        Note note =(Note)intent.getSerializableExtra("note");
-        int index =-1;
-        for (Note n: data){
-            if(n.tieuDe.equals(note.tieuDe)){
-                index = data.indexOf(n);
-                break;
-            }
-        }
-        //cap nhat lai du lieu moi
-        if(index!=-1) {
-            data.set(index, note);
-            adapter.notifyDataSetChanged();
-        }
-    }
     //khoi tao va dang ky xu ly
     ActivityResultLauncher activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult()
                 , new ActivityResultCallback<ActivityResult>() {
@@ -93,17 +78,10 @@ public class MainActivity extends AppCompatActivity {
                                Toast.LENGTH_SHORT).show();
                    }
 
-               }else if(action.equals("update")){
-                   //thuc hien cap nhat lai database
                }
             }
 
         }
     });
-    private void initData(){
-        data.add(new Note("Di choi","Xem phim sau do la di an","23/10/2022"));
-        data.add(new Note("Di hoc","hoc gi kho the?","24/10/2022"));
-        data.add(new Note("Buon qua","Buon thi di choi thoi","25/10/2022"));
-        data.add(new Note("Co hen voi nguoi ieu","Xem phim sau do la di an","26/10/2022"));
-    }
+
 }
